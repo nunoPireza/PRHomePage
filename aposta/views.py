@@ -11,3 +11,6 @@ def aposta(request):
 def detalhe(request, aposta_id):
     aposta = get_object_or_404(Aposta, pk=aposta_id)
     return render(request, 'aposta/detalhe.html', {'aposta': aposta})
+
+def novaaposta(request):
+    return render(request, 'aposta/novaaposta.html')
