@@ -8,17 +8,15 @@
 {% if apostas_list %}
 <ul>
 {% for aposta in apostas_list %}
-
 <li><a href="{% url 'aposta:detalhe' aposta.id%}">{{ aposta.nome }}</a></li>
-
 {% endfor %}
 </ul>
 {% else %}
 <p>Não existem apostas disponíveis.</p>
 {% endif %}
 
+<a href="{% url 'aposta:novaaposta' %}">Nova Aposta</a><br>
 
-<a href="{% url 'aposta:novaaposta'%}">Nova Aposta</a><br>
 </br>
 
 

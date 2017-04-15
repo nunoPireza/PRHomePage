@@ -6,5 +6,16 @@
 </head>
 <body>
 
+
+{% block content %}
+
+<form action="{% url 'aposta:gravaAposta' %}" method="post">
+{% csrf_token %}
+  Aposta: <input type="text" name="aposta"><br>
+  <input type="submit" value="Gravar aposta e voltar à lista">
+</form>
+{% endblock %}
+
+
 </body>
 </html>
