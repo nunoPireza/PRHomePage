@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomepageConfig',
-    'aposta.apps.AppConfig',
+    'aposta.apps.ApostaConfig',
 ]
 
 MIDDLEWARE = [
