@@ -6,9 +6,9 @@ from django.template import loader
 from django.utils import timezone
 
 def aposta(request):
-    apostas_list =
+    apostas = Aposta.objects.all()
     template = loader.get_template('aposta/index.html')
-    context = {'apostas_list': apostas_list}
+    context = {'apostas': apostas}
     return render(request, 'aposta/index.html', context)
 
 def detalhe(request, aposta_id):
@@ -18,10 +18,10 @@ def detalhe(request, aposta_id):
 def novaaposta(request):
     return render(request, 'aposta/novaaposta.html')
 
-
-
-def gravaAposta(request):
+def gravaAposta(request,concurso_id):
+    concurso = get_object_or_404(Concurso,pk=concurso_id)
     texto=request.POST['aposta']
-    a=Aposta(dataAposta=timezone.now(),nome=texto)
+    concurso.op
+    a=Aposta(concurso,dataAposta=timezone.now(),nome=texto)
     a.save()
     return HttpResponseRedirect(reverse('aposta:index'))
