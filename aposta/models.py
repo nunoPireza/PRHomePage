@@ -8,11 +8,6 @@ class Conta(models.Model):
     def __str__(self):
         return self.numConta
 
-class Concurso(models.Model):
-    numConcurso = models.IntegerField
-    def __str__(self):
-        return self.numConcurso
-
 class Aposta(models.Model):
     concurso = models.ForeignKey(Concurso, on_delete=models.CASCADE)
     dataAposta = models.DateField()
