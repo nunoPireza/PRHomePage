@@ -30,7 +30,8 @@ def mandaEmail(request):
     emaildestino = request.POST['email']
     titulo = 'Email de confirmação  de registo'
     mensagem = 'Bem vindo ao site de apostas..bla bla bla'
-    send_mail(titulo, mensagem, settings.EMAIL_HOST_USER, emaildestino, fail_silently=True)
+    send_mail(titulo, mensagem, settings.EMAIL_HOST_USER, ['nunopireza@gmail.com'], fail_silently=False)
+    return render(request, 'home/homepage.html')
 
 def registo(request):
     return render(request, 'home/registo.html')
