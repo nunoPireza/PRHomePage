@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^admin/$', views.admin, name='admin'),
     url(r'^recuperarPass/$', views.recuperarPass, name='recuperarPass'),
     url(r'^$', views.returnHomepage, name='returnHomepage'),
+    url(r'^aposta$', views.fazerAposta, name='fazerAposta'),
 ]

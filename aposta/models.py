@@ -5,28 +5,37 @@ from django.utils import timezone
 # Create your models here.
 class Conta(models.Model):
     numConta = models.IntegerField
+    saldo = models.IntegerField
+    nomeUtilizador = models.CharField(max_length=30)
+    email = models.EmailField(max_length=70)
     def __str__(self):
         return self.numConta
 
+class Concurso(models.Model):
+    numConcurso = models.SmallIntegerField(primary_key=True)
+    dataConcurso = models.DateTimeField('dataconcurso')
+    b1 = models.CharField(max_length=2)
+    b2 = models.CharField(max_length=2)
+    b3 = models.CharField(max_length=2)
+    b4 = models.CharField(max_length=2)
+    b5 = models.CharField(max_length=2)
+    e1 = models.CharField(max_length=2)
+    e2 = models.CharField(max_length=2)
+    def __str__(self):
+        return self.numConcurso
+
 class Aposta(models.Model):
-    concurso = models.ForeignKey(Concurso, on_delete=models.CASCADE)
+    nAposta = models.SmallIntegerField(primary_key=True)
+    nConta = models.IntegerField(null=True)
     dataAposta = models.DateField()
     nome = models.CharField(max_length=200)
-    def __str__(self):
-        return self.nome
-
-class Concurso2(models.Model):
-    concurso_edicao = models.CharField(max_length=20)
-    pub_data = models.DateTimeField('data de publicacao')
-    def __str__(self):
-        return self.concurso_edicao
-    def foi_publicada_recentemente(self):
-        return self.pub_data >= timezone.now() - datetime.timedelta(days=1)
-
-class Aposta2(models.Model):
-    Concurso2_identificao = models.ForeignKey(Concurso2, on_delete=models.CASCADE)
-    aposta_identificacao = models.CharField(max_length=200)
-    valor = models.IntegerField(default=0)
+    b1 = models.CharField(max_length=2)
+    b2 = models.CharField(max_length=2)
+    b3 = models.CharField(max_length=2)
+    b4 = models.CharField(max_length=2)
+    b5 = models.CharField(max_length=2)
+    e1 = models.CharField(max_length=2)
+    e2 = models.CharField(max_length=2)
 
     def __str__(self):
-        return self.aposta_identificacao
+        return self.nAposta
