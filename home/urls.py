@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from . import views
-app_name = 'home'
 
 urlpatterns = [
     url(r'^$', views.homepage, name='home'),
@@ -10,4 +9,6 @@ urlpatterns = [
     url(r'^recuperarPass/$', views.recuperarPass, name='recuperarPass'),
     url(r'^$', views.returnHomepage, name='returnHomepage'),
     url(r'^aposta$', views.fazerAposta, name='fazerAposta'),
+    url(r'^registo$', views.registo, name='registo'),
+    url(r'^mandaEmail$', views.mandaEmail, name='mandaEmail'),
 ]

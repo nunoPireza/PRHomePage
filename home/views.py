@@ -26,15 +26,11 @@ def recuperarPass(request):
 def fazerAposta(request):
     return render(request, 'home/aposta.html')
 
-def gravaAposta(request):
-    texto=request.POST['aposta']
-    q=Questao(questao_texto=texto, pub_data= timezone.now())
-    q.save()
-    return HttpResponseRedirect(reverse('votacao:index'))
-
-def criarUtilizador(request):
+def mandaEmail(request):
+    emaildestino = request.POST['email']
     titulo = 'Email de confirmação  de registo'
     mensagem = 'Bem vindo ao site de apostas..bla bla bla'
-    emaildestino = 'nmfpa@iscte.pt'
-    send_mail(titulo,mensagem,settings.EMAIL_HOST_USER,emaildestino,fail_silently=True)
+    send_mail(titulo, mensagem, settings.EMAIL_HOST_USER, emaildestino, fail_silently=True)
 
+def registo(request):
+    return render(request, 'home/registo.html')
