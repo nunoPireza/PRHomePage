@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [url(r'^admin/', admin.site.urls),
                url(r'^home/', include('home.urls', namespace='home')),
                url(r'^aposta/', include('aposta.urls',namespace='aposta')),
+               url(r'^areas/', include('areas.urls',namespace='areas')),
                ]
