@@ -3,12 +3,18 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from  django.core.mail import send_mail
 
+
+def inicio(request):
+    return render(request, 'home/inicio.html')
+
+def exitMenor(request):
+    return render(request, 'home/exitMenor.html')
+
 def homepage(request):
     return render(request, 'home/homepage.html')
 
 def returnHomepage(request):
     return HttpResponseRedirect(reverse('home/homepage.html'))
-
 
 def novaconta(request):
     return render(request, 'home/novaconta.html')
