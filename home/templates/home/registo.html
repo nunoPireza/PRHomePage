@@ -2,17 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registo</title>
+    <title>Novo Registo</title>
 </head>
 <body>
+<h1> Bem vindo ao site de Apostas. Não perca mais tempo e faça já o seu registo.</h1>
 
-<form action=" {%  url 'home:mandaEmail' %}" method="post">
-    {% csrf_token %}
-  E-mail:
-  <input type="email" name="email">
-  <input type="submit">
-</form>
+    <form action="{% url 'home:mandaEmail'%}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Nome" name="first_name" required/>
+        <input type="text" placeholder="Apelido" name="last_name" required/>
+        <input type="text" autocomplete="off" placeholder="Username" name="new_username"required/>
+            {% if same_user %}
+            <strong>Já existe um utilizador com esse username.</strong>
+            {% endif %}
+        <input type="password" autocomplete="off" placeholder="Password" name="new_password" pattern=".{5,}" title="Password com 8 caracteres obrigatórios." required/>
+        <input type="email" placeholder="Email" name="new_email" required/>
+        <input type="number" placeholder="NIF" name="nif"/>
+        <input type="number" placeholder="Contacto" name="contacto"/>
+        <input type="number" placeholder="Código Postal" name="codigopostal"/>
+        <input type="text" placeholder="Morada" name="morada"/>
+        <input type="text" placeholder="Localidade" name="localidade"/>
+        <input type="text" placeholder="País" name="pais"/>
 
+            <input type="submit" value="Registar"/>
+        </form>
 
 </body>
 </html>
+
+

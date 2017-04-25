@@ -27,9 +27,10 @@ def fazerAposta(request):
     return render(request, 'home/aposta.html')
 
 def mandaEmail(request):
-    emaildestino = request.POST['email']
-    titulo = 'Email de confirmação  de registo'
-    mensagem = 'Bem vindo ao site de apostas..bla bla bla'
+    emaildestino = request.POST['new_email']
+    destinatario = request.POST['first_name'] + " " + request.POST['last_name']
+    titulo = 'Email de confirmação de registo'
+    mensagem = 'Bem vindo ao site de apostas ' + destinatario + "."
     send_mail(titulo, mensagem, settings.EMAIL_HOST_USER, ['nunopireza@gmail.com'], fail_silently=False)
     return render(request, 'home/homepage.html')
 
