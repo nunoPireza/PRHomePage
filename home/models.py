@@ -14,3 +14,7 @@ class Utilizador(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Teste(models.Model):
+    coluna1 = models.IntegerField()
+

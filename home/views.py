@@ -33,49 +33,50 @@ def fazerAposta(request):
 def novoRegisto(request):
     if request.POST['input_username'] is '':
         context = {'invalid_user': True}
-        return render(request, "registo.html", context)
+        return render(request, "home/registo.html", context)
 
     if request.POST['input_email'] is '':
         context = {'invalid_email': True}
-        return render(request, "registo.html", context)
+        return render(request, "home/registo.html", context)
 
     if request.POST['input_password'] is '':
         context = {'invalid_pass': True}
-        return render(request, "registo.html", context)
+        return render(request, "home/registo.html", context)
 
     if request.POST['input_name'] is '':
         context = {'invalid_name': True}
-        return render(request, "registo.html", context)
+        return render(request, "home/registo.html", context)
 
     if request.POST['input_surname'] is '':
         context = {'invalid_last': True}
-        return render(request, 'registo.html', context)
+        return render(request, 'home/registo.html', context)
     else:
         try:
-            new_user = User.objects.create_user(request.POST['input_username'], request.POST['input_email'], request.POST['input_password'])
-            new_user.first_name = request.POST['input_name']
-            new_user.last_name = request.POST['input_surname']
-            new_user.save()
+            fuser = User.objects.create_user(request.POST['input_username'], request.POST['input_email'],
+                                             request.POST['input_password'])
+            fuser.first_name = request.POST['input_name']
+            fuser.last_name = request.POST['input_surname']
+            fuser.save()
         except:
             context = {}
             context['same_user'] = True
-            return render(request, 'registo.html', context)
+            return render(request, 'home/registo.html', context)
 
-        new_user = Utilizador(user=new_user)
+        fuser = Utilizador(user=fuser)
         if request.POST['input_nif']:
-            new_user.NIF = request.POST['input_nif']
+            fuser.NIF = request.POST['input_nif']
         if request.POST['input_morada']:
-            new_user.morada = request.POST['input_morada']
+            fuser.morada = request.POST['input_morada']
         if request.POST['input_codpostal']:
-            new_user.codigopostal = request.POST['input_codpostal']
+            fuser.codigopostal = request.POST['input_codpostal']
         if request.POST['input_contacto']:
-            new_user.contacto = request.POST['input_contacto']
+            fuser.contacto = request.POST['input_contacto']
         if request.POST['input_loc']:
-            new_user.localidade = request.POST['input_loc']
+            fuser.localidade = request.POST['input_loc']
         if request.POST['input_pais']:
-            new_user.pais = request.POST['input_pais']
+            fuser.pais = request.POST['input_pais']
 
-        new_user.save()
+        fuser.save()
 
         emaildestino = request.POST['input_email']
         destinatario = request.POST['input_name'] + " " + request.POST['input_surname']
@@ -87,3 +88,4 @@ def novoRegisto(request):
 
 def registo(request):
     return render(request, 'home/registo.html')
+
