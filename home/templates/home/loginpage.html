@@ -1,0 +1,16 @@
+{% block content %}
+  <h2>Entrar no site</h2>
+  {% if form.errors %}
+    <p style="color: red">O username e a password não foram encontradas. Tenta outra vez.</p>
+  {% endif %}
+  <form method="post" action="{% url 'home:loginview' %}">
+    {% csrf_token %}
+
+  <p>Username :  <input type="text" autocomplete="off" name="username"></p>
+  <p>Password :  <input type="password" autocomplete="off" name="password"></p>
+
+
+<input type="submit" value="entrar">
+    <a href="{% url 'home:registo' %}">Novo na página? Regista-te</a>
+  </form>
+{% endblock %}

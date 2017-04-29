@@ -5,12 +5,14 @@
     <title>Home Page</title>
 </head>
 <body>
-<h1>estou na pagina pessoal</h1>
+<h1>estou na pagina pessoal </h1>
+<h2>Bem vindo, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
 
 <li><a href="{% url 'home:areacomum' %}">Link para area comum</a></li>
 <li><a href="{% url 'home:admin' %}"> Link para conta de administração</a></li>
 <li><a href="{% url 'home:recuperarPass' %}"> Link para recuperar pass</a></li>
 <li><a href="{% url 'home:fazerAposta' %}"> Fazer aposta</a></li>
 <li><a href="{% url 'home:registo' %}"> Novo Registo</a></li>
+<li><a href="{% url 'home:logout' %}"> Sair</a></li>
 </body>
 </html>

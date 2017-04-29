@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .models import Utilizador
-
+from django.contrib.auth import authenticate, login
 
 def inicio(request):
     return render(request, 'home/inicio.html')
@@ -88,4 +88,17 @@ def novoRegisto(request):
 
 def registo(request):
     return render(request, 'home/registo.html')
+
+def loginpage(request):
+    return render(request, 'home/loginpage.html')
+
+def loginview(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username = username, password = password)
+    if user is not None:
+        login(request, user)
+        return render(request, 'home/homepage.html')
+    else:
+        return HttpResponse('Falhou')
 

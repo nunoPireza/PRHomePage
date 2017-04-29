@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^aposta$', views.fazerAposta, name='fazerAposta'),
     url(r'^registo$', views.registo, name='registo'),
     url(r'^novoRegisto$', views.novoRegisto, name='novoRegisto'),
-]
+    url(r'^loginpage$', views.loginpage, name='loginpage'),
+    url(r'^loginview$', views.loginview, name='loginview'),
+    ]
