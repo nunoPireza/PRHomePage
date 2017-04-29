@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .models import Utilizador
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 def inicio(request):
     return render(request, 'home/inicio.html')
@@ -102,3 +102,6 @@ def loginview(request):
     else:
         return HttpResponse('Falhou')
 
+def logoutview(request):
+    logout(request)
+    return render(request, 'home/inicio.html')

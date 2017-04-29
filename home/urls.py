@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^novoRegisto$', views.novoRegisto, name='novoRegisto'),
     url(r'^loginpage$', views.loginpage, name='loginpage'),
     url(r'^loginview$', views.loginview, name='loginview'),
+    url(r'^logoutview/$',views.logoutview, name='logoutview'),
     ]

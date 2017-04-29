@@ -8,11 +8,10 @@
     <header>
       <h1>Apostando</h1>
       {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Sair</a>
+          <p>Bem vindo, {{ user.username }}  <a href="{% url 'home:logoutview' %}">[Sair]</a></p>
       {% else %}
-        <a href="{% url 'login' %}">Entrar</a> / <a href="{% url 'signup' %}">Registro</a>
+           <p>Bem vindo, Convidado <a href="{% url 'home:loginpage' %}">[login]</a></p>
       {% endif %}
-      <hr>
     </header>
     <main>
       {% block content %}
