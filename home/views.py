@@ -18,17 +18,11 @@ def homepage(request):
 def returnHomepage(request):
     return HttpResponseRedirect(reverse('home/homepage.html'))
 
-def areacomum(request):
-    return render(request, 'home/areacomum.html')
-
 def admin(request):
     return render(request, 'home/admin.html')
 
 def recuperarPass(request):
     return render(request, 'home/recuperarPass.html')
-
-def fazerAposta(request):
-    return render(request, 'home/aposta.html')
 
 def novoRegisto(request):
     if request.POST['input_username'] is '':
