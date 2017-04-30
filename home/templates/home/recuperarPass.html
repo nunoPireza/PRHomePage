@@ -5,7 +5,18 @@
     <title>Recuperar Pass</title>
 </head>
 <body>
-<h1>estou no recuperar pass</h1>
-<li><a href="{% url 'home:returnHomepage' %}"> de volta para homepage</a></li>
+<h1> Esqueceu a sua password? Preencha os campos para recuperação da password</h1>
+
+
+<form action="{% url 'home:novoRegisto'%}" method="post">
+        {% csrf_token %}
+        <p><strong>Email :  </strong><input type="email" placeholder="Email" name="input_email" required/></p>
+        <p><strong>Password :  </strong><input type="password" autocomplete="off" placeholder="Password" name="input_password" pattern=".{5,}" title="Password com 8 caracteres obrigatórios." required/></p>
+        <p><strong>NIF :  </strong><input type="number" placeholder="NIF" name="input_nif" required/></p>
+        <br><p><input type="submit" value="recuperarPass"/></p>
+</form>
+
 </body>
 </html>
+
+
