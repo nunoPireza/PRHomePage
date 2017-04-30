@@ -15,9 +15,6 @@ def exitMenor(request):
 def homepage(request):
     return render(request, 'home/homepage.html')
 
-def returnHomepage(request):
-    return HttpResponseRedirect(reverse('home/homepage.html'))
-
 def admin(request):
     return render(request, 'home/admin.html')
 
