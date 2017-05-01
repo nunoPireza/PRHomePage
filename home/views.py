@@ -1,10 +1,12 @@
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, HttpResponse, HttpResponseRedirect, redirect
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+from django.utils.datastructures import MultiValueDictKeyError
 from .models import Utilizador
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 
 def inicio(request):
     return render(request, 'home/inicio.html')
@@ -18,17 +20,33 @@ def homepage(request):
 def returnHomepage(request):
     return HttpResponseRedirect(reverse('home/homepage.html'))
 
+def personalpage(request):
+    args = {}
+    for each in User._meta.fields:
+        args[each.name] = getattr(User, each.name)
+    return render(request, 'home/personalpage.html', args)
+
 def areacomum(request):
     return render(request, 'home/areacomum.html')
 
 def admin(request):
     return render(request, 'home/admin.html')
 
-def recuperarPass(request):
-    return render(request, 'home/recuperarPass.html')
 
 def fazerAposta(request):
     return render(request, 'home/aposta.html')
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request,'home/homepage.html')
+    else:
+        form = UserCreationForm()
+
+    args = {'form':form}
+    return render(request, 'home/reg_form.html', args)
 
 def novoRegisto(request):
     if request.POST['input_username'] is '':
@@ -82,7 +100,7 @@ def novoRegisto(request):
         destinatario = request.POST['input_name'] + " " + request.POST['input_surname']
         titulo = 'Email de confirmação de registo'
         mensagem = 'Bem vindo ao site de apostas ' + destinatario + "."
-        send_mail(titulo, mensagem, settings.EMAIL_HOST_USER, [emaildestino], fail_silently=False)
+        send_mail(titulo, mensagem, settings.EMAIL_HOST_USER, [emaildestino], fail_silently=True)
         return render(request, 'home/homepage.html')
 
 
@@ -95,13 +113,57 @@ def loginpage(request):
 def loginview(request):
     username = request.POST['username']
     password = request.POST['password']
-    user = authenticate(username = username, password = password)
+    user = authenticate(username=username, password=password)
+    context = {}
     if user is not None:
         login(request, user)
-        return render(request, 'home/homepage.html')
+        args = {}
+        for each in User._meta.fields:
+            args[each.name] = getattr(User, each.name)
+        return render(request, 'home/personalpage.html', args)
+
     else:
-        return HttpResponse('Falhou')
+        context['noUser'] = True
+        return render(request, "home/loginpage.html", context)
 
 def logoutview(request):
     logout(request)
-    return render(request, 'home/inicio.html')
+    return render(request, 'home/logout.html')
+
+
+def changePassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/siteapostas/personalpage')
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+        args = {'form': form}
+        return render(request, 'home/changepassword.html')
+
+def submeterpass(request):
+    acco = get_object_or_404(Utilizador, user=request.user)
+    context = {}
+    context['acc'] = acco
+    if request.user.is_authenticated:
+        try:
+            if request.user.check_password(request.POST['oldpassword']):
+                if request.POST['newpassword'] == request.POST['confnewpassword']:
+                    request.user.set_password(request.POST['newpassword'])
+                    request.user.save()
+
+                    return render(request, "home/personalpage.html")
+                else:
+                    context['no_match'] = True
+                    return render(request, "home/changepassword.html", context)
+            else:
+                context['old'] = True
+                return render(request, "home/changepassword.html", context)
+
+        except MultiValueDictKeyError:
+            return HttpResponseRedirect(reverse('home:changepassword'))
+    else:
+        return HttpResponse("É necessário estar autenticado.")

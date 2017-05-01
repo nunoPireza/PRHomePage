@@ -1,0 +1,10 @@
+
+{% block body %}
+<form action="{% url 'home:register'%}" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+
+<button type="submit">Registar</button>
+</form>
+
+{% endblock %}

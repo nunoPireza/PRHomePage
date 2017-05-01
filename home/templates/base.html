@@ -8,7 +8,7 @@
     <header>
       <h1>Apostando</h1>
       {% if user.is_authenticated %}
-          <p>Bem vindo, {{ user.username }}  <a href="{% url 'home:logoutview' %}">[Sair]</a></p>
+          <p>Bem vindo, {{ user.username }}  <a href="{% url 'home:logout' %}">[Sair]</a></p>
       {% else %}
            <p>Bem vindo, Convidado <a href="{% url 'home:loginpage' %}">[login]</a></p>
       {% endif %}
