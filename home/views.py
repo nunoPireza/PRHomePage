@@ -17,6 +17,7 @@ def exitMenor(request):
 def homepage(request):
     return render(request, 'home/homepage.html')
 
+<<<<<<< HEAD
 def returnHomepage(request):
     return HttpResponseRedirect(reverse('home/homepage.html'))
 
@@ -29,10 +30,13 @@ def personalpage(request):
 def areacomum(request):
     return render(request, 'home/areacomum.html')
 
+=======
+>>>>>>> origin/master
 def admin(request):
     return render(request, 'home/admin.html')
 
 
+<<<<<<< HEAD
 def fazerAposta(request):
     return render(request, 'home/aposta.html')
 
@@ -48,6 +52,8 @@ def register(request):
     args = {'form':form}
     return render(request, 'home/reg_form.html', args)
 
+=======
+>>>>>>> origin/master
 def novoRegisto(request):
     if request.POST['input_username'] is '':
         context = {'invalid_user': True}
