@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +8,14 @@
     <title>Area Pessoal</title>
 </head>
 <body>
-<h1>estou na area pessoal</h1>
+<h1>Bem vindo ao site de Apostas, faça login para começar a apostar</h1>
 
 <li><a href="{% url 'home:returnHomepage' %}"> de volta para homepage</a></li>
 <li><a href="{% url 'home:loginpage' %}"> fazer login</a></li>
 <li><a href="{% url 'home:password_reset' %}"> recuperar pass</a></li>
 <li><a href="{% url 'home:registo' %}"> Novo Registo</a></li>
+
+<h1>Aqui ficam imagens publicidade!!!</h1>
 </body>
 </html>
+{% endblock %}
